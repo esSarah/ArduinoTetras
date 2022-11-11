@@ -1,0 +1,54 @@
+{
+  "version": 1,
+  "author": "Uri Shaked",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "wokwi-arduino-mega", "id": "mega", "top": 240, "left": -65.33, "attrs": {} },
+    { "type": "wokwi-lcd1602", "id": "lcd", "top": 326, "left": 401.34, "attrs": {} },
+    {
+      "type": "wokwi-resistor",
+      "id": "r1",
+      "top": 266.67,
+      "left": 764.48,
+      "attrs": { "value": "220" }
+    },
+    {
+      "type": "wokwi-max7219-matrix",
+      "id": "matrix1",
+      "top": 106.63,
+      "left": 102.66,
+      "attrs": { "chain": "4" }
+    },
+    {
+      "type": "wokwi-analog-joystick",
+      "id": "joystick1",
+      "top": 414.83,
+      "left": 889.54,
+      "attrs": {}
+    }
+  ],
+  "connections": [
+    [ "r1:1", "lcd:A", "red", [ "h-9.03", "v265", "h-187.61" ] ],
+    [ "lcd:RW", "mega:GND.5", "black", [ "v98.88", "h-166.17" ] ],
+    [ "lcd:VSS", "mega:GND.5", "black", [ "v98.88", "h-127.67" ] ],
+    [ "lcd:K", "mega:GND.5", "black", [ "v98.88", "h-271.67" ] ],
+    [ "mega:5V.2", "r1:2", "red", [ "h530.02", "v27.67" ] ],
+    [ "lcd:VDD", "mega:5V.2", "red", [ "v83.32", "h415.24", "v-292.29" ] ],
+    [ "lcd:D7", "mega:33", "white", [ "v63.32", "h-225.19", "v-214.79" ] ],
+    [ "lcd:D6", "mega:31", "red", [ "v53.98", "h-205.02", "v-214.95" ] ],
+    [ "lcd:D5", "mega:29", "white", [ "v45.32", "h-184.85", "v-216.04" ] ],
+    [ "lcd:D4", "mega:27", "blue", [ "v35.32", "h-164.02", "v-215.54" ] ],
+    [ "lcd:E", "mega:25", "blue", [ "v28.65", "h-104.02", "v-218.37" ] ],
+    [ "lcd:RS", "mega:23", "blue", [ "v20.65", "h-73.85", "v-220.12" ] ],
+    [ "matrix1:GND.2", "mega:GND.4", "#8f4814", [ "h-191.64", "v419.84", "h382.65" ] ],
+    [ "matrix1:DOUT", "mega:35", "orange", [ "h-175.78", "v348.66", "h331.19", "v-178.09" ] ],
+    [ "matrix1:CS.2", "mega:37", "gold", [ "h-169.25", "v324.14", "h329.32", "v-153.67" ] ],
+    [ "matrix1:CLK.2", "mega:39", "white", [ "h-163.65", "v300.54", "h327.46", "v-129.92" ] ],
+    [ "joystick1:GND", "mega:GND.5", "#8f4814", [ "v24.97", "h-655.27" ] ],
+    [ "joystick1:SEL", "mega:41", "green", [ "v17.83", "h-625.7", "v-204.71" ] ],
+    [ "joystick1:HORZ", "mega:A15", "gold", [ "v40.97", "h-649.32" ] ],
+    [ "joystick1:VERT", "mega:A14", "orange", [ "v57.07", "h-649.47" ] ],
+    [ "matrix1:V+.2", "mega:5V.1", "red", [ "h-24.13", "v69.97", "h215.14" ] ],
+    [ "joystick1:VCC", "mega:5V.2", "red", [ "v8.93", "h-65.15", "v-291.56" ] ]
+  ]
+}

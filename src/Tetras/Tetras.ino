@@ -2,7 +2,7 @@
 #include "LedControl.h"
 
 // Pins LCD
-LiquidCrystal lcd(33, 31, 29, 27, 25, 23);
+LiquidCrystal lcd(23, 25, 27, 29, 31, 33);
 // Pins LED
 LedControl lc=LedControl(35,39,37,1);
 // Pins Joystick
@@ -11,21 +11,18 @@ const int SW_pin = 41; // digital pin connected to switch output
 const int X_pin = 14; // analog pin connected to X output
 const int Y_pin = 15; // analog pin connected to Y output
 
-// delays for led display
-unsigned long delaytime1=500;
-unsigned long delaytime2=50;
-
 int orientations[4] = {94,62, 118, 60 };
 // form the tetris blocks
+// mirrored for personally prefered coordinate system
 byte blocks[5][4][4] = 
 {
   {
     {
-      B0010,
-      B0010,
-      B0010,
-      B0010,
-    },
+      B0100,
+      B0100,
+      B0100,
+      B0100,
+    },    
     {
       B0000,
       B0000,
@@ -33,10 +30,10 @@ byte blocks[5][4][4] =
       B0000,
     },
     {
-      B0100,
-      B0100,
-      B0100,
-      B0100,
+      B0010,
+      B0010,
+      B0010,
+      B0010,
     },
     {
       B0000,
@@ -48,47 +45,9 @@ byte blocks[5][4][4] =
   {
     {
       B0110,
-      B0100,
-      B0100,
-      B0000,
-    },
-    {
-      B0000,
-      B0111,
-      B0001,
-      B0000,
-    },
-    {
-      B0000,
-      B0010,
-      B0010,
-      B0110,
-    },
-    {
-      B0000,
-      B1000,
-      B1110,
-      B0000,
-    },
-  },
-  {
-    {
-      B0110,
       B0010,
       B0010,
       B0000,
-    },
-    {
-      B0000,
-      B0001,
-      B0111,
-      B0000,
-    },
-    {
-      B0000,
-      B0100,
-      B0100,
-      B0110,
     },
     {
       B0000,
@@ -96,29 +55,67 @@ byte blocks[5][4][4] =
       B1000,
       B0000,
     },
+    {
+      B0000,
+      B0100,
+      B0100,
+      B0110,
+    },
+    {
+      B0000,
+      B0001,
+      B0111,
+      B0000,
+    },
   },
   {
     {
+      B0110,
       B0100,
-      B0110,
-      B0010,
-      B0000,
-    },
-    {
-      B0000,
-      B0110,
-      B0011,
-      B0000,
-    },
-    {
-      B0000,
       B0100,
-      B0110,
-      B0010,
+      B0000,
     },
     {
       B0000,
+      B1000,
+      B1110,
+      B0000,
+    },
+    {
+      B0000,
+      B0010,
+      B0010,
+      B0110,
+    },
+    {
+      B0000,
+      B0111,
+      B0001,
+      B0000,
+    },
+  },
+  {
+    {
+      B0010,
+      B0110,
+      B0100,
+      B0000,
+    },
+    {
+      B0000,
+      B0110,
       B1100,
+      B0000,
+    },
+    {
+      B0000,
+      B0010,
+      B0110,
+      B0100,
+    },
+    {
+      B0000,
+      B0011,
       B0110,
       B0000,
     },
@@ -266,11 +263,15 @@ static void paintPoint(int x, int y)
 {
   if(x>=0&&x<8)
   {
+    // inverted coordinates
+    // which is why mirrored 
+    // blocks were neccessary
     x=7-x;
     if(y>=0&&y<8)
     {
       y=7-y;
-      LedMatrix[x] = LedMatrix[x]|Position[y];
+      // switch expected x and y because display is rotated 90°
+      LedMatrix[y] = LedMatrix[y]|Position[x];
     }
   }
 }
@@ -335,12 +336,12 @@ void setup()
 
 void loop() 
 {
-
+  
   // example write to LEDs
   int x=0;
   int y=0;
   // blocktype
-  for(int i=3; i < 5; i++)
+  for(int i=0; i < 5; i++)
   {
     //orientation
     for(int j=0; j < 4; j++)
@@ -366,7 +367,7 @@ void loop()
       lcd.setCursor(2, 1);
       lcd.write(orientations[j]);       
       delay(1000);
-
+      // millies()
     }
   }
 }

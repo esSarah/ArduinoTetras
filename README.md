@@ -6,5 +6,5 @@ Took me two hours to make what I already have work in the simulation at
 
 Copy the content of the two source files into each emptied page and under 
 Library Manager add the following two Libraries:
-- ´LiquidCrystal´
-- ´LedControl´
+- `LiquidCrystal`
+- `LedControl`
